@@ -1,0 +1,49 @@
+mkdir -p simbuild/micaz
+  placing object files in simbuild/micaz
+  writing XML schema to app.xml
+  compiling Project1AppC to object file sim.o
+ncc -c -shared -fPIC -o simbuild/micaz/sim.o -g -O0 -tossim -fnesc-nido-tosnodes=1000 -fnesc-simulate -fnesc-nido-motenumber=sim_node\(\) -fnesc-gcc=gcc -Wall -Wshadow -Wnesc-all -target=micaz -fnesc-cfile=simbuild/micaz/app.c -board=micasb -DDEFINED_TOS_AM_GROUP=0x22 --param max-inline-insns-single=100000 -DIDENT_APPNAME=\"Project1AppC\" -DIDENT_USERNAME=\"user\" -DIDENT_HOSTNAME=\"user-iot\" -DIDENT_USERHASH=0x2c00343aL -DIDENT_TIMESTAMP=0x64ec767aL -DIDENT_UIDHASH=0x8d1ba90aL -Wno-nesc-data-race Project1AppC.nc   -fnesc-dump=components -fnesc-dump=variables -fnesc-dump=constants -fnesc-dump=typedefs -fnesc-dump=interfacedefs -fnesc-dump=tags -fnesc-dumpfile=app.xml
+In file included from Project1AppC.nc:12:
+In component `Project1C':
+Project1C.nc: In function `generateRandomValue':
+Project1C.nc:123: warning: declaration of `rand' shadows global declaration
+/usr/include/stdlib.h:374: warning: location of shadowed declaration
+Project1C.nc: In function `Receive.receive':
+Project1C.nc:211: warning: `return' with no value, in function returning non-void
+Project1C.nc:223: warning: declaration of `msg' shadows previous local
+Project1C.nc:214: warning: location of shadowed declaration
+Project1C.nc:278: warning: declaration of `msg' shadows previous local
+Project1C.nc:214: warning: location of shadowed declaration
+Project1C.nc: In function ‘Project1C$Receive$receive’:
+Project1C.nc:211:5: warning: ‘return’ with no value, in function returning non-void [-Wreturn-type]
+      if (len != sizeof(msg_t)) return;
+     ^
+Project1C.nc:223:22: warning: declaration of ‘msg’ shadows a previous local [-Wshadow]
+          msg_t* msg = (msg_t*)call Packet.getPayload(&packet, sizeof(msg_t));
+                      ^
+Project1C.nc:214:14: warning: shadowed declaration is here [-Wshadow]
+        msg_t* msg = (msg_t*)payload;
+              ^
+Project1C.nc:278:22: warning: declaration of ‘msg’ shadows a previous local [-Wshadow]
+       msg_t* msg = (msg_t*)call Packet.getPayload(&packet, sizeof(msg_t));
+                      ^
+Project1C.nc:214:14: warning: shadowed declaration is here [-Wshadow]
+        msg_t* msg = (msg_t*)payload;
+              ^
+/opt/tinyos-main-2.1.2/tos/lib/tossim/sim_noise.c: In function ‘sim_noise_gen’:
+/opt/tinyos-main-2.1.2/tos/lib/tossim/sim_noise.c:291:7: warning: variable ‘noiseIndex’ set but not used [-Wunused-but-set-variable]
+   int noiseIndex = 0;
+       ^
+  compiling Python support and C libraries into pytossim.o, tossim.o, and c-support.o
+g++ -c  -shared -fPIC -o simbuild/micaz/pytossim.o -g -O0 -DIDENT_APPNAME=\"Project1AppC\" -DIDENT_USERNAME=\"user\" -DIDENT_HOSTNAME=\"user-iot\" -DIDENT_USERHASH=0x2c00343aL -DIDENT_TIMESTAMP=0x64ec767aL -DIDENT_UIDHASH=0x8d1ba90aL /opt/tinyos-main-2.1.2/tos/lib/tossim/tossim_wrap.cxx -I/usr/local/include/python2.7 -I/opt/tinyos-main-2.1.2/tos/lib/tossim -DHAVE_CONFIG_H 
+/opt/tinyos-main-2.1.2/tos/lib/tossim/tossim_wrap.cxx: In function ‘void SWIG_Python_AddErrorMsg(const char*)’:
+/opt/tinyos-main-2.1.2/tos/lib/tossim/tossim_wrap.cxx:880:42: warning: format not a string literal and no format arguments [-Wformat-security]
+     PyErr_Format(PyExc_RuntimeError, mesg);
+                                          ^
+g++ -c  -shared -fPIC -o simbuild/micaz/tossim.o -g -O0 -DIDENT_APPNAME=\"Project1AppC\" -DIDENT_USERNAME=\"user\" -DIDENT_HOSTNAME=\"user-iot\" -DIDENT_USERHASH=0x2c00343aL -DIDENT_TIMESTAMP=0x64ec767aL -DIDENT_UIDHASH=0x8d1ba90aL /opt/tinyos-main-2.1.2/tos/lib/tossim/tossim.c -I/usr/local/include/python2.7 -I/opt/tinyos-main-2.1.2/tos/lib/tossim
+g++ -c  -shared -fPIC -o simbuild/micaz/c-support.o -g -O0 -DIDENT_APPNAME=\"Project1AppC\" -DIDENT_USERNAME=\"user\" -DIDENT_HOSTNAME=\"user-iot\" -DIDENT_USERHASH=0x2c00343aL -DIDENT_TIMESTAMP=0x64ec767aL -DIDENT_UIDHASH=0x8d1ba90aL /opt/tinyos-main-2.1.2/tos/lib/tossim/hashtable.c -I/usr/local/include/python2.7 -I/opt/tinyos-main-2.1.2/tos/lib/tossim
+  linking into shared object ./_TOSSIMmodule.so
+g++ -shared -fPIC  simbuild/micaz/pytossim.o simbuild/micaz/sim.o simbuild/micaz/tossim.o simbuild/micaz/c-support.o -lstdc++  -o _TOSSIMmodule.so
+  copying Python script interface TOSSIM.py from lib/tossim to local directory
+ 
+*** Successfully built micaz TOSSIM library. 
