@@ -37,4 +37,4 @@ The following features need to be implemented:
 A detailed report about the project development can be found in the .pdf file `IOT_Project_10488414_10812073.pdf`.
 
 ## Credits
-Developed by Claudio Eutizi (PERSON_ID: 10812073) and Gabriele Perego (PERSON_ID: 10488414)
+Developed by Claudio Eutizi and Gabriele Perego 
